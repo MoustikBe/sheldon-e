@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/21 11:39:20 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:43:11 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*token;
 	t_shell	*shell;
 
+	token = NULL;
 	if (argc > 1)
 		return (printf("ERROR, verify the entry -> %s\n", argv[0]));
 	shell = malloc(sizeof(t_shell));
