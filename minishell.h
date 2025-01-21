@@ -26,6 +26,8 @@ typedef struct t_utils
 	int ret_val;
 	int temp_fd;
 	int quot_flag;
+	int in_quotes; 
+	int in_quote;
 	char *cmp_cmd_1;
 }	t_utils;
 
