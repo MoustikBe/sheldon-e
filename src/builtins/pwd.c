@@ -17,7 +17,7 @@ void	pwd(void)
 	char cwd[1024];
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
-        printf("Current working directory: %s\n", cwd);
+        printf("%s\n", cwd);
 	else
 		perror("getcwd failed");
 }
