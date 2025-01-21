@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:34:08 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/16 15:56:43 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:39:17 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ void	exec_bin(t_token *token, char **envp, t_shell *shell)
 	exec_bin_next(token, utils);
 	exec_cmd = ft_split(utils->cmp_cmd_1, ' ');
 	free(utils->cmp_cmd_1);
+	fprintf(stderr, "PATH -> %s\n", path);
 	execve(path, exec_cmd, envp);
 	free(path);
 	free_array(exec_cmd);
@@ -209,8 +210,13 @@ static void	binary_option(t_shell *shell, t_token *token, char **envp)
 		exec_bin(token, envp, shell);
 	else
 	{
+		signal(SIGINT, SIG_IGN);
+		//disable_ctrl_c_display();
 		waitpid(pid, &status, 0);
-		shell->last_exit_status = status;
+		if (WIFEXITED(status))
+			shell->last_exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			shell->last_exit_status = 128 + WTERMSIG(status);
 	}
 }
 
@@ -253,7 +259,10 @@ static void	simple_pipe_exec(t_shell *shell, t_token *token)
 	else
 	{
 		waitpid(pid, &status, 0);
-		shell->last_exit_status = status;
+		if (WIFEXITED(status))
+			shell->last_exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			shell->last_exit_status = 128 + WTERMSIG(status);
 	}
 }
 
@@ -273,10 +282,7 @@ void	exec_main(t_token *token, char **envp, t_shell *shell)
 			exit(0);
 		}
 		else
-		{
 			waitpid(pid, &status, 0);
-			shell->last_exit_status = status;
-		}
 	}
 	else
 		exec_main_next(shell, token, envp);
