@@ -14,7 +14,7 @@
 
 void	ft_exit(t_token *token, int j)
 {
-	int i;
+	int	i;
 
 	j++;
 	while (token[j].id != 6 && token[j].str)

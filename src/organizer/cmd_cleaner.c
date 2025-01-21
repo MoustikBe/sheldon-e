@@ -77,7 +77,7 @@ static void	cmd_cleaner_copy(t_utils *u, t_shell *shell, char *pipe_cmd)
 
 static void	quot_file_checker(t_shell *shell)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	shell->flag = 0;
@@ -86,13 +86,12 @@ static void	quot_file_checker(t_shell *shell)
 		if (i > 0)
 			if ((shell->cmd[i] == '<' && shell->cmd[i - 1] == '"')
 				|| (shell->cmd[i] == '<' && shell->cmd[i - 1] == '\'')
-			|| (shell->cmd[i] == '>' && shell->cmd[i - 1] == '"')
-				||(shell->cmd[i] == '>' && shell->cmd[i - 1] == '\''))
+				|| (shell->cmd[i] == '>' && shell->cmd[i - 1] == '"')
+				|| (shell->cmd[i] == '>' && shell->cmd[i - 1] == '\''))
 				shell->flag = 1;
 		i++;
 	}
 }
-
 
 void	cmd_cleaner(t_shell *shell)
 {

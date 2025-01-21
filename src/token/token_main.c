@@ -23,6 +23,12 @@ static void	token_main_next(t_token *token, t_utils *u, char *cmd)
 	u->i++;
 }
 
+static void	skip_space(t_utils *u, char *cmd)
+{
+	while (cmd[u->j] == ' ')
+		u->j++;
+}
+
 t_token	*token_main(char *cmd, t_token *token, t_shell *shell)
 {
 	t_utils	*u;
@@ -30,6 +36,7 @@ t_token	*token_main(char *cmd, t_token *token, t_shell *shell)
 	u = malloc(sizeof(t_utils));
 	init_var_utils(u);
 	token = malloc(sizeof(t_token) * len_token(cmd));
+	skip_space(u, cmd);
 	while (u->i < len_token(cmd) - 1)
 	{
 		token[u->i].id = 0;
@@ -48,6 +55,5 @@ t_token	*token_main(char *cmd, t_token *token, t_shell *shell)
 	token[u->i].id = 0;
 	token_parser(token, shell, len_token(cmd));
 	shell->len_token = len_token(cmd);
-	free(u);
-	return (token);
+	return (free(u), token);
 }

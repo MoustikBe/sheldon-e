@@ -15,7 +15,11 @@
 static void	len_token_utils(t_utils *u, char *cmd)
 {
 	while (cmd[u->i] == ' ')
+	{
+		if (u->i == 0)
+			u->len--;
 		u->i++;
+	}
 	u->len++;
 }
 

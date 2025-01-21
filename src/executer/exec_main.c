@@ -210,7 +210,6 @@ static void	binary_option(t_shell *shell, t_token *token, char **envp)
 	else
 	{
 		signal(SIGINT, SIG_IGN);
-		//disable_ctrl_c_display();
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			shell->last_exit_status = WEXITSTATUS(status);
