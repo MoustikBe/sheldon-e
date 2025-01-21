@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/21 11:31:41 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:32:20 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,3 @@ int	main(int argc, char **argv, char **envp)
 	unlink("/tmp/.heredoc");
 	return (free(shell), free(shell->cmd), free_env(shell), 0);
 }
-
-/*
-	
-	if (cpy_cmd)
-		free(cpy_cmd);
-	return (free_env(shell), free(shell), free(shell->cmd), 0);
-*/
