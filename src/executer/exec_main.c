@@ -172,7 +172,6 @@ void	exec_bin(t_token *token, char **envp, t_shell *shell)
 	exec_bin_next(token, utils);
 	exec_cmd = ft_split(utils->cmp_cmd_1, ' ');
 	free(utils->cmp_cmd_1);
-	fprintf(stderr, "PATH -> %s\n", path);
 	execve(path, exec_cmd, envp);
 	free(path);
 	free_array(exec_cmd);

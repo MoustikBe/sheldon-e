@@ -14,7 +14,7 @@
 
 int	direct_bin(char *cmd)
 {
-	if (access(cmd, O_RDONLY) == 0)
+	if (access(cmd, X_OK) == 0)
 		return (1);
 	return (0);
 }
