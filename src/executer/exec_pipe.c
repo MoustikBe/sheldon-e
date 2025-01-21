@@ -27,7 +27,7 @@ static void	child_process_menu(t_shell *shell, t_token *token, char **cmd_exec)
 	else if (check_cmd_quotes(cmd_exec[0]) == 7)
 		env(shell);
 	else if (check_cmd_quotes(cmd_exec[0]) == 8)
-		exit(0);
+		ft_exit(token, 0);
 	exit(0);
 }
 
@@ -168,7 +168,7 @@ t_shell *shell, char **cmd_exec)
 	else if (check_cmd_quotes(cmd_exec[0]) == 7)
 		env(shell);
 	else if (check_cmd_quotes(cmd_exec[0]) == 8)
-		exit(0);
+		ft_exit(token, u->i_copy);
 	free(u->cmp_cmd_1);
 	exit(0);
 }

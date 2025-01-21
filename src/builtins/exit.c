@@ -12,8 +12,26 @@
 
 #include "../../minishell.h"
 
-void	ft_exit(void)
+void	ft_exit(t_token *token, int j)
 {
+	int i;
+
+	j++;
+	while (token[j].id != 6 && token[j].str)
+	{
+		i = 0;
+		while (token[j].str[i])
+		{
+			if (!isdigit(token[j].str[i]))
+			{
+				printf("exit\n");
+				printf("numeric argument required\n");
+				exit(0);
+			}
+			i++;
+		}
+		j++;
+	}
 	printf("exit\n");
 	exit(0);
 }

@@ -175,7 +175,7 @@ void cd(char *path);
 void export(t_shell *shell, t_token *token, int j);
 void env(t_shell *shell);
 void unset(t_shell *shell, t_token *token, int j);
-void ft_exit(void);
+void ft_exit(t_token *token, int j);
 char *build_cmp(char *str);
 int in_out(t_token *token, int j);
 

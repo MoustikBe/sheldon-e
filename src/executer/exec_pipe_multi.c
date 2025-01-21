@@ -27,7 +27,7 @@ static void	step_1_next(t_token *token, t_shell *shell, char **cmd_exec)
 	else if (check_cmd_quotes(cmd_exec[0]) == 7)
 		env(shell);
 	else if (check_cmd_quotes(cmd_exec[0]) == 8)
-		ft_exit();
+		ft_exit(token, 0);
 	exit(0);
 }
 
@@ -134,7 +134,7 @@ char **cmd_exec, int i_copy)
 	else if (check_cmd_quotes(cmd_exec[0]) == 7)
 		env(shell);
 	else if (check_cmd_quotes(cmd_exec[0]) == 8)
-		ft_exit();
+		ft_exit(token, i_copy);
 	exit(0);
 }
 

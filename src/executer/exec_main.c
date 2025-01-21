@@ -240,7 +240,7 @@ static void	exec_main_next(t_shell *shell, t_token *token, char **envp)
 	else if (token[0].id == 16)
 		env(shell);
 	else if (token[0].id == 17)
-		ft_exit();
+		ft_exit(token, 0);
 	if (terminal)
 		dup2(terminal, STDOUT_FILENO);
 	if (token[0].id > 10)
