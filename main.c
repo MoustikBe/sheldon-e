@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/16 14:51:47 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:31:41 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,51 @@ void	free_env(t_shell *shell)
 	shell->env = NULL;
 }
 
-int	main(int argc, char **argv, char **envp)
+static void	main_exec_cmd(t_token *token, t_shell *shell, char **envp)
+{
+	token = token_main(shell->cmd, token, shell);
+	if (shell->error == 1)
+	{
+		printf("\033[0;31mMinishell : command invalid \033[00m\n");
+		shell->last_exit_status = 127;
+	}
+	else
+		exec_main(token, envp, shell);
+	free_all_token(token);
+}
+
+static void	main_loop(t_shell *shell, t_token *token, char **envp)
 {
 	int		ret_val;
-	char	*cpy_cmd;
+
+	if (shell->cmd[0] == '\0' || verif_quotes(shell->cmd))
+		ret_val = -1;
+	else
+	{
+		cmd_cleaner(shell);
+		expansion(shell);
+		here_doc(shell);
+		ret_val = parsing_main(shell->cmd);
+	}
+	if (ret_val == -1)
+		shell->last_exit_status = 127;
+	else if (ret_val == 0)
+	{
+		printf("\033[0;31mMinishell : command invalid \033[00m\n");
+		shell->last_exit_status = 127;
+	}
+	else if (ret_val == 1)
+		main_exec_cmd(token, shell, envp);
+	free(shell->cmd);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
 	t_token	*token;
 	t_shell	*shell;
 
-	if(argc > 1)
-		return(printf("ERROR, verify the entry -> %s\n", argv[0]));
-	cpy_cmd = NULL;
+	if (argc > 1)
+		return (printf("ERROR, verify the entry -> %s\n", argv[0]));
 	shell = malloc(sizeof(t_shell));
 	copy_env(envp, shell);
 	shell->len_token = 0;
@@ -53,41 +88,15 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			break ;
 		}
-		if (shell->cmd[0] == '\0' || verif_quotes(shell->cmd))
-			ret_val = -1;
-		else
-		{
-			cmd_cleaner(shell);
-			expansion(shell);
-			here_doc(shell);
-			ret_val = parsing_main(shell->cmd);
-		}
-		if (ret_val == -1)
-			shell->last_exit_status = 127;
-		else if (ret_val == 0)
-		{
-			printf("\033[0;31mMinishell : command invalid \033[00m\n");
-			shell->last_exit_status = 127;
-		}
-		else if (ret_val == 1)
-		{
-			token = token_main(shell->cmd, token, shell);
-			if (shell->error == 1)
-			{
-				printf("\033[0;31mMinishell : command invalid \033[00m\n");
-				shell->last_exit_status = 127;
-			}
-			else
-				exec_main(token, envp, shell);
-			free_all_token(token);
-		}
-		free(shell->cmd);
+		main_loop(shell, token, envp);
 	}
 	unlink("/tmp/.heredoc");
-	free_env(shell);
-	free(shell->cmd);
+	return (free(shell), free(shell->cmd), free_env(shell), 0);
+}
+
+/*
+	
 	if (cpy_cmd)
 		free(cpy_cmd);
-	free(shell);
-	return (0);
-}
+	return (free_env(shell), free(shell), free(shell->cmd), 0);
+*/
