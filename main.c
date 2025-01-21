@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/21 11:32:20 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:39:20 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,5 @@ int	main(int argc, char **argv, char **envp)
 		main_loop(shell, token, envp);
 	}
 	unlink("/tmp/.heredoc");
-	return (free(shell), free(shell->cmd), free_env(shell), 0);
+	return (free(shell->cmd), free_env(shell), free(shell), 0);
 }
