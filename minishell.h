@@ -66,7 +66,7 @@ typedef struct t_shell
 	int	len_token;
 	int error;
 	char *env_cmd;
-
+	int flag;
 	/* IN TEST */
 	int status;
 	int last_exit_status;
@@ -141,14 +141,14 @@ int search_in_env_writed(t_shell *shell, char *cmp_cmd, int temp_fd);
 // src/token/token_main.c //
 t_token *token_main(char *cmd, t_token *token, t_shell *shell);
 // src/token/token_set.c //
-void token_id(t_token *token, int i);
+void token_id(t_token *token, int i, t_shell *shell);
 // src/token/token_id.c // 
 int is_var(t_token *token, int i);
 int is_char(t_token *token, int i);
 int is_pipe(t_token *token, int i);
-int is_infile(t_token *token, int i);
-int is_outfile(t_token *token, int i);
-int is_outfile_append(t_token *token, int i);
+int is_infile(t_token *token, int i, t_shell *shell);
+int is_outfile(t_token *token, int i, t_shell *shell, int j);
+int is_outfile_append(t_token *token, int i, t_shell *shell, int j);
 int is_cmd(t_token *token, int i);
 int is_flag(t_token *token, int i);
 // src/token/token_utils.c //

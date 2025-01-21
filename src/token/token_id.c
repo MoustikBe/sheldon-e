@@ -69,8 +69,10 @@ int	is_pipe(t_token *token, int i)
 	return (0);
 }
 
-int	is_infile(t_token *token, int i)
+int	is_infile(t_token *token, int i, t_shell *shell)
 {
+	if (shell->flag == 1)
+		return(0);
 	if (i > 0 && token[i - 1].str[0] == '<' && token[i - 1].str[1] != '<')
 		token[i].id = 5;
 	else if (token[i].str[0] == '<' && token[i].str[1] != '<')
@@ -83,11 +85,11 @@ int	is_infile(t_token *token, int i)
 	return (0);
 }
 
-int	is_outfile_append(t_token *token, int i)
+int	is_outfile_append(t_token *token, int i, t_shell *shell, int j)
 {
-	int	j;
-
 	j = 0;
+	if (shell->flag == 1)
+		return(0);
 	if (i > 0 && token[i - 1].str[0] == '>'
 		&& token[i - 1].str[1] == '>')
 		token[i].id = 40;
@@ -111,11 +113,11 @@ int	is_outfile_append(t_token *token, int i)
 	return (0);
 }
 
-int	is_outfile(t_token *token, int i)
+int	is_outfile(t_token *token, int i, t_shell *shell, int j)
 {
-	int	j;
-
 	j = 0;
+	if (shell->flag == 1)
+		return(0);
 	if (i > 0 && token[i - 1].str[0] == '>' && token[i - 1].str[1] != '>')
 		token[i].id = 4;
 	else if (token[i].str[0] == '>' && token[i].str[1] != '>')

@@ -41,7 +41,7 @@ t_token	*token_main(char *cmd, t_token *token, t_shell *shell)
 			free(token[u->i].str);
 			token[u->i].str = ft_strdup("\"");
 		}
-		token_id(token, u->i);
+		token_id(token, u->i, shell);
 		token_main_next(token, u, cmd);
 	}
 	token[u->i].str = NULL;

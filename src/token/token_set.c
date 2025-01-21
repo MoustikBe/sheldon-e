@@ -12,17 +12,17 @@
 
 #include "../../minishell.h"
 
-void	token_id(t_token *token, int i)
+void	token_id(t_token *token, int i, t_shell *shell)
 {
 	if (is_cmd(token, i) == 1)
 		return ;
 	else if (is_flag(token, i) == 1)
 		return ;
-	else if (is_outfile_append(token, i) == 1)
+	else if (is_outfile_append(token, i, shell, 0) == 1)
 		return ;
-	else if (is_outfile(token, i) == 1)
+	else if (is_outfile(token, i, shell, 0) == 1)
 		return ;
-	else if (is_infile(token, i) == 1)
+	else if (is_infile(token, i, shell) == 1)
 		return ;
 	else if (is_pipe(token, i) == 1)
 		return ;
