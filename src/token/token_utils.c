@@ -125,7 +125,7 @@ int	token_copy(t_token *token, char *cmd, int i, int j)
 		else if (cmd[j] == '\'' && u->in_quote == 0)
 			token_copy_flag(u, &j, &u->in_quote);
 		else if (cmd[j] == '\'' && u->in_quote == 1)
-			toke_reset_quot(&j, &u->in_quotes);
+			toke_reset_quot(&j, &u->in_quote);
 		else
 			token[i].str[u->len++] = cmd[j++];
 	}

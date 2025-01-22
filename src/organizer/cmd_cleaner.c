@@ -12,18 +12,47 @@
 
 #include "../../minishell.h"
 
+static void	quote_management(t_shell *shell, t_utils *u)
+{
+	if (shell->cmd[u->i] == '"' && u->in_quotes == 0)
+		u->in_quotes = 1;
+	else if (shell->cmd[u->i] == '\'' && u->in_quote == 0)
+		u->in_quote = 1;
+	else if (shell->cmd[u->i] == '"' && u->in_quotes == 1)
+		u->in_quotes = 0;
+	else if (shell->cmd[u->i] == '\'' && u->in_quote == 1)
+		u->in_quote = 0;
+}
+
+static void	cmd_len_else(t_utils *u)
+{
+	u->i++;
+	u->len++;
+}
+
+static void	cmd_copy_else(t_utils *u, char *pipe_cmd)
+{
+	pipe_cmd[u->j] = ' ';
+	pipe_cmd[u->j + 1] = '|';
+	u->j = u->j + 2;
+}
+
 static void	cmd_cleaner_len(t_utils *u, t_shell *shell)
 {
 	while (shell->cmd[u->i])
 	{
-		if ((shell->cmd[u->i] == '<' && shell->cmd[u->i + 1] == ' ')
-			|| (shell->cmd[u->i] == '>' && shell->cmd[u->i + 1] == ' '))
+		quote_management(shell, u);
+		if ((shell->cmd[u->i] == '<' && shell->cmd[u->i + 1] == ' '
+				&& u->in_quotes == 0 && u->in_quote == 0)
+			|| (shell->cmd[u->i] == '>' && shell->cmd[u->i + 1] == ' '
+				&& u->in_quotes == 0 && u->in_quote == 0))
 		{
 			u->i++;
 			while (shell->cmd[u->i] == ' ')
 				u->i++;
 		}
-		else if (shell->cmd[u->i] == '|')
+		else if (shell->cmd[u->i] == '|' && u->in_quotes == 0
+			&& u->in_quote == 0)
 		{
 			if (shell->cmd[u->i - 1] != ' ')
 				u->len++;
@@ -33,10 +62,7 @@ static void	cmd_cleaner_len(t_utils *u, t_shell *shell)
 			u->i++;
 		}
 		else
-		{
-			u->i++;
-			u->len++;
-		}
+			cmd_len_else(u);
 	}
 }
 
@@ -53,19 +79,19 @@ static void	cmd_cleaner_copy(t_utils *u, t_shell *shell, char *pipe_cmd)
 {
 	while (shell->cmd[u->i])
 	{
-		if ((shell->cmd[u->i] == '<' && shell->cmd[u->i + 1] == ' ')
-			|| (shell->cmd[u->i] == '>' && shell->cmd[u->i + 1] == ' '))
+		quote_management(shell, u);
+		if ((shell->cmd[u->i] == '<' && shell->cmd[u->i + 1] == ' '
+				&& u->in_quotes == 0 && u->in_quote == 0)
+			|| (shell->cmd[u->i] == '>' && shell->cmd[u->i + 1] == ' '
+				&& u->in_quotes == 0 && u->in_quote == 0))
 			cmd_cleaner_cutils(u, shell, pipe_cmd);
-		else if (shell->cmd[u->i] == '|')
+		else if (shell->cmd[u->i] == '|' && u->in_quote == 0
+			&& u->in_quotes == 0)
 		{
 			if (shell->cmd[u->i - 1] == ' ')
 				pipe_cmd[u->j++] = '|';
 			else
-			{
-				pipe_cmd[u->j] = ' ';
-				pipe_cmd[u->j + 1] = '|';
-				u->j = u->j + 2;
-			}
+				cmd_copy_else(u, pipe_cmd);
 			if (shell->cmd[u->i + 1] != ' ')
 				pipe_cmd[u->j++] = ' ';
 			u->i++;
@@ -105,6 +131,8 @@ void	cmd_cleaner(t_shell *shell)
 		u->len++;
 	pipe_cmd = malloc(sizeof(char) * u->len + 3);
 	u->i = 0;
+	u->in_quote = 0;
+	u->in_quotes = 0;
 	cmd_cleaner_copy(u, shell, pipe_cmd);
 	if (shell->cmd[u->i - 1] != ' ')
 	{
