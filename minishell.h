@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:52:33 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/23 20:14:06 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/23 20:57:41 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,12 +181,46 @@ void	token_parser(t_token *token, t_shell *shell, int len);
 // -- Executer -- //
 // src/executer/exec_main.c //
 void	exec_main(t_token *token, char **envp, t_shell *shell);
+// src/executer/exec_main_path.c //
 char	*make_path(char *token, t_shell *shell);
+int		check_path(t_shell *shell);
+void	binary_option(t_shell *shell, t_token *token, char **envp);
+void	exec_bin(t_token *token, char **envp, t_shell *shell);
+void	exec_bin_next(t_token *token, t_utils *utils);
+// src/executer/exec_main_utils.c //
+int		check_pipe(t_token *token);
+void	verif_in(t_token *token, int i);
 // src/executer/exec_pipe.c //
 void	pipex_simple(t_token *token, t_shell *shell);
-// src/executer/exec_pipe_multi.c //
+void	parent_buildcharloop(t_utils *u, t_token *token);
+void	inter_step_pipe(int fd[2]);
+void	child_join_char(t_utils *utils, t_token *token);
+// src/executer/exec_pipe_file.c //
+void	parent_file_4(t_utils *utils, t_token *token);
+void	parent_file_40(t_utils *utils, t_token *token);
+void	parent_file_5(t_utils *utils, t_token *token);
+void	parent_file_mngt(t_utils *u, t_token *token);
+void	child_process_fd(char *file_in);
+// src/executer/exec_pipe_subproc.c //
+void	child_process(int fd[2], t_token *tok, char *file_in, t_shell *shell);
+void	child_process_menu(t_shell *shell, t_token *token, char **cmd_exec);
+void	parent_process(int fd[2], t_token *token, t_shell *shell);
+void	parent_menu(t_utils *u, t_token *token, t_shell *shell, char **cmd_exec);
+void	parent_inter_step(int fd[2]);
+// src/executer/exec_multi_pipe.c //
 void	pipex_multi(t_token *token, t_shell *shell);
-
+// src/executer/exec_multi_file.c //
+void	last_step_4(t_token *token, int i);
+void	last_step_40(t_token *token, int i);
+void	command_exec_4(t_shell *shell, t_token *token);
+void	command_exec_5(t_shell *shell, t_token *token);
+void	command_exec_40(t_shell *shell, t_token *token);
+// src/executer/exec_multi_process.c //
+void	sub_process(t_shell *shell, t_token *token, pid_t pid);
+void	createprocessus(pid_t pid, t_shell *shell, t_token *token);
+void	wait_execution(int nb_cmd);
+void	command_execution(t_token *token, t_shell *shell);
+void	command_execution_next(t_shell *shell, t_token *token, char **cmd_exec, int i_copy);
 // -- Builins -- // 
 void	echo(t_token *token, int j);
 void	pwd(void);
