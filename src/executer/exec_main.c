@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:34:08 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/21 13:39:17 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:33:41 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	check_path(t_shell *shell)
 			split_path = ft_split(env->env_var, ':');
 			while (split_path[i])
 			{
-				if (str_cmp(split_path[i], "/usr/local/bin") == 1)
+				if (str_cmp(split_path[i], "/usr/local/bin") == 1
+					|| str_cmp(split_path[i], "/bin") == 1)
 					return (free_array(split_path), 1);
 				i++;
 			}
