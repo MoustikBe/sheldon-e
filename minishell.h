@@ -250,12 +250,19 @@ int		str_cmp(char *cmd, char *cmp_cmd);
 int		str_cmp_quotes(char *cmd, char *cmp_cmd);
 void	free_array(char **arr);
 int		ft_isalnum(int alph);
-char	*ft_strdup(char *src);
-char	*clean_name(char *src);
-void	ft_putchar_fd(char c, int fd);
 // src/micro_lib/ft_split.c //
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
+char	*word_dup_special(char *str, int start, int finish);
+// src/micro_lib/ft_split_utils.c //
+int		init_struct_split(t_split *split, char *s);
+int		word_dup_len(t_split *sp, int finish, char *str);
+int		copy_words(t_split *sp, char **split, char *s);
+
+// src/micro_lib/ft_split_quote.c //
+void	cw_scenario_1(t_split *sp, char *s, char c, int *x);
+void	change_for_0(t_split *sp, char *s, int *x);
+void	change_for_1(t_split *sp, char *s, int *x);
 // src/micro_lib/split_basic.c //
 char	**ft_split_basic(char *s, char c);
 // src/micro_lib/get_next_line.c //
@@ -266,6 +273,10 @@ void	ft_putnbr(int n);
 char	*ft_itoa(int n);
 // src/micro_lib/init_struct.c //
 void	init_var_utils(t_utils *utils);
+// src/micro_lib/utils_next.c //
+char	*clean_name(char *src);
+char	*ft_strdup(char *src);
+void	ft_putchar_fd(char c, int fd);
 
 // -- End of declaration -- //
 #endif

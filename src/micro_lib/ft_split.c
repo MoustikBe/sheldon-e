@@ -12,40 +12,6 @@
 
 #include "../../minishell.h"
 
-static int	init_struct_split(t_split *split, char *s)
-{
-	split->i = -1;
-	split->j = 0;
-	split->index = -1;
-	split->i_qs = 0;
-	split->i_q = 0;
-	split->in_quotes = 0;
-	split->in_quote = 0;
-	split->word = 0;
-	split->count = 0;
-	split->new_alloc = 0;
-	split->inside = 0;
-	split->i_wd = 0;
-	if (!split || !s)
-		return (1);
-	return (0);
-}
-
-static void	free_memory(char **split, int j)
-{
-	while (--j >= 0)
-		free(split[j]);
-	free(split);
-}
-
-static void	cw_scenario_1(t_split *sp, char *s, char c, int *x)
-{
-	*x = 0;
-	sp->word++;
-	if (s[sp->count + 1] == c)
-		sp->word++;
-}
-
 static int	count_words(t_split *sp, char *s, char c)
 {
 	while (s[sp->count])
@@ -71,29 +37,7 @@ static int	count_words(t_split *sp, char *s, char c)
 	return (sp->word);
 }
 
-static int	word_dup_len(t_split *sp, int finish, char *str)
-{
-	while (sp->s_start < finish)
-	{
-		if ((sp->s_start == finish - 1 && str[sp->s_start] == '"' )
-			|| (sp->s_start == finish - 1 && str[sp->s_start] == '\''))
-			sp->s_start++;
-		else if ((str[sp->s_start] == '"' && sp->inside == 0)
-			|| (str[sp->s_start] == '\'' && sp->inside == 0))
-		{
-			sp->inside = 1;
-			sp->s_start++;
-		}
-		else
-		{
-			sp->s_start++;
-			sp->new_alloc++;
-		}
-	}
-	return (sp->new_alloc + 1);
-}
-
-static char	*word_dup(char *str, int start, int finish)
+char	*word_dup_special(char *str, int start, int finish)
 {
 	char	*word;
 	t_split	*sp;
@@ -120,32 +64,6 @@ static char	*word_dup(char *str, int start, int finish)
 	word[sp->i_wd] = '\0';
 	free(sp);
 	return (word);
-}
-
-static void	change_for_0(t_split *sp, char *s, int *x)
-{
-	while (s[sp->i] != ' ' && s[sp->i] != '\0')
-		sp->i++;
-	*x = 0;
-}
-
-static void	change_for_1(t_split *sp, char *s, int *x)
-{
-	if (sp->i > 0)
-	{
-		if (s[sp->i - 1] == ' ')
-			sp->index = sp->i;
-	}
-	*x = 1;
-}
-
-static int	copy_words(t_split *sp, char **split, char *s)
-{
-	split[sp->j++] = word_dup(s, sp->index, sp->i);
-	if (!split[sp->j - 1])
-		return (free_memory(split, sp->j), 1);
-	sp->index = -1;
-	return (0);
 }
 
 static int	condition_loop(t_split *sp, char **split, char *s, char c)

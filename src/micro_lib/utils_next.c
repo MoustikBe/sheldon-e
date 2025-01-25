@@ -12,67 +12,73 @@
 
 #include "../../minishell.h"
 
-int	ft_strlen(char *str)
+static int	detect_synt(char *src)
 {
 	int	i;
+	int	count;
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	str_cmp(char *cmd, char *cmp_cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i] && cmd[i] != ' ')
+	count = 0;
+	while (src[i])
 	{
-		if (cmd[i] != cmp_cmd[i])
-			return (0);
+		if (src[i] == '>' || src[i] == '<')
+			count++;
 		i++;
 	}
-	if (ft_strlen(cmp_cmd) == i)
-		return (1);
-	return (0);
+	return (count);
 }
 
-int	str_cmp_quotes(char *cmd, char *cmp_cmd)
+char	*clean_name(char *src)
 {
-	int	i;
+	int		length;
+	int		count;
+	int		i;
+	char	*dest;
 
+	length = ft_strlen(src);
+	count = 0;
 	i = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] != cmp_cmd[i])
-			return (0);
-		i++;
-	}
-	if (ft_strlen(cmp_cmd) == i)
-		return (1);
-	return (0);
-}
-
-void	free_array(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-int	ft_isalnum(int alph)
-{
-	if (((alph >= 65) && (alph <= 90)) || ((alph >= 97) && (alph <= 122)))
-		return (1);
-	else if ((alph >= 48) && (alph <= 57))
-		return (1);
+	if (detect_synt(src))
+		dest = malloc((length) + 1 - detect_synt(src) * sizeof(char));
 	else
-		return (0);
+		dest = malloc((length) + 1 * sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	while (src[count] != '\0')
+	{
+		if (src[count] == '>' || src[count] == '<')
+			count++;
+		else
+			dest[i++] = src[count++];
+	}
+	dest[i] = '\0';
+	free(src);
+	return (dest);
+}
+
+char	*ft_strdup(char *src)
+{
+	char	*dest;
+	int		length;
+	int		count;
+
+	length = ft_strlen(src);
+	count = 0;
+	dest = malloc((length + 1) * sizeof(char));
+	if (dest == NULL)
+	{
+		return (NULL);
+	}
+	while (src[count] != '\0')
+	{
+		dest[count] = src[count];
+		count++;
+	}
+	dest[count] = '\0';
+	return (dest);
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write (fd, &c, 1);
 }
