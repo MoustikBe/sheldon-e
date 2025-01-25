@@ -50,48 +50,6 @@ int	len_token(char *cmd)
 	return (save_val);
 }
 
-int	len_for_token(char *cmd, int i)
-{
-	int	j;
-	int	in_quotes;
-	int	in_quote;
-
-	in_quotes = 0;
-	in_quote = 0;
-	j = 0;
-	while (cmd[i] == ' ')
-		i++;
-	while (cmd[i])
-	{
-		if (cmd[i] == ' ' && in_quotes == 0 && in_quote == 0)
-			break ;
-		else if (cmd[i] == '"' && in_quotes == 0 && in_quote == 0)
-			in_quotes = 1;
-		else if (cmd[i] == '"' && in_quotes == 1 && in_quote == 0)
-			in_quotes = 0;
-		else if (cmd[i] == '\'' && in_quote == 0 && in_quotes == 0)
-			in_quote = 1;
-		else if (cmd[i] == '\'' && in_quote == 1 && in_quotes == 0)
-			in_quote = 0;
-		i++;
-		j++;
-	}
-	return (j);
-}
-
-void	free_all_token(t_token *token)
-{
-	int	i;
-
-	i = 0;
-	while (token[i].str)
-	{
-		free(token[i].str);
-		i++;
-	}
-	free(token);
-}
-
 static void	token_copy_flag(t_utils *u, int *j, int *x)
 {
 	(*j)++;

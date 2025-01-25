@@ -172,20 +172,22 @@ int		search_in_env_writed(t_shell *shell, char *cmp_cmd, int temp_fd);
 t_token	*token_main(char *cmd, t_token *token, t_shell *shell);
 // src/token/token_set.c //
 void	token_id(t_token *token, int i, t_shell *shell);
-// src/token/token_id.c // 
-int		is_var(t_token *token, int i);
-int		is_char(t_token *token, int i);
-int		is_pipe(t_token *token, int i);
-int		is_infile(t_token *token, int i, t_shell *shell);
+// src/token/token_id.c //
 int		is_outfile(t_token *token, int i, t_shell *shell, int j);
 int		is_outfile_append(t_token *token, int i, t_shell *shell, int j);
 int		is_cmd(t_token *token, int i);
 int		is_flag(t_token *token, int i);
+// src/token/token_id_utils.c //
+int		is_var(t_token *token, int i);
+int		is_char(t_token *token, int i);
+int		is_pipe(t_token *token, int i);
+int		is_infile(t_token *token, int i, t_shell *shell);
 // src/token/token_utils.c //
-void	free_all_token(t_token *token);
-int		len_for_token(char *cmd, int i);
 int		len_token(char *cmd);
 int		token_copy(t_token *token, char *cmd, int i, int j);
+// src/token/token_utils_next.c //
+void	free_all_token(t_token *token);
+int		len_for_token(char *cmd, int i);
 // src/token/token_pars.c // 
 void	token_parser(t_token *token, t_shell *shell, int len);
 
