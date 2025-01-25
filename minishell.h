@@ -132,8 +132,16 @@ void	sigint_handler(int sig);
 void	manage_signals(void);
 
 // -- Organizer -- //
+// src/organizer/cmd_cleaner.c //
 void	cmd_cleaner(t_shell *shell);
 int		verif_quotes(char *cmd);
+void	cmd_len_else(t_utils *u);
+void	cmd_copy_else(t_utils *u, char *pipe_cmd);
+// src/organizer/cmd_utils.c //
+void	cmd_cleaner_len(t_utils *u, t_shell *shell);
+void	cmd_cleaner_cutils(t_utils *u, t_shell *shell, char *pipe_cmd);
+void	cmd_cleaner_copy(t_utils *u, t_shell *shell, char *pipe_cmd);
+void	quote_management(t_shell *shell, t_utils *u);
 
 // -- Env -- // 
 // src/env/env_main.c //

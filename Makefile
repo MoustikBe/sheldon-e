@@ -11,7 +11,7 @@ SOURCES     = src/parsing/pars_bin.c src/parsing/pars_cd.c src/parsing/pars_quot
 			  src/env/env_main.c src/env/env_expansion.c src/env/env_utils.c src/env/env_expansion_copy.c src/env/env_expansion_utils.c \
               src/herdoc/herdoc_exec.c src/herdoc/herdoc_expansion.c src/herdoc/herdoc_main.c src/herdoc/herdoc_utils.c \
 			  src/signals/signal.c  \
-			  src/organizer/cmd_cleaner.c \
+			  src/organizer/cmd_cleaner.c src/organizer/cmd_utils.c \
 			  src/micro_lib/ft_split.c src/micro_lib/utils.c src/micro_lib/ft_strjoin.c src/micro_lib/split_basic.c src/micro_lib/get_next_line.c src/micro_lib/get_next_line_utils.c src/micro_lib/put_nbr.c src/micro_lib/ft_itoa.c src/micro_lib/init_struct.c src/micro_lib/utils_next.c src/micro_lib/ft_split_utils.c src/micro_lib/ft_split_quote.c \
               main.c
 
