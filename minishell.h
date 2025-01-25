@@ -209,6 +209,7 @@ void	parent_menu(t_utils *u, t_token *token, t_shell *shell, char **cmd_exec);
 void	parent_inter_step(int fd[2]);
 // src/executer/exec_multi_pipe.c //
 void	pipex_multi(t_token *token, t_shell *shell);
+void	joining_command(t_utils *utils, t_token *token, t_shell *shell);
 // src/executer/exec_multi_file.c //
 void	last_step_4(t_token *token, int i);
 void	last_step_40(t_token *token, int i);
@@ -221,6 +222,13 @@ void	createprocessus(pid_t pid, t_shell *shell, t_token *token);
 void	wait_execution(int nb_cmd);
 void	command_execution(t_token *token, t_shell *shell);
 void	command_execution_next(t_shell *shell, t_token *token, char **cmd_exec, int i_copy);
+// src/executer/exec_multi_step.c //
+void	to_nb_cmd(t_shell *shell);
+void	from_nb_cmd(t_shell *shell);
+void	step_1_next(t_token *token, t_shell *shell, char **cmd_exec);
+void	step_1(pid_t pid, t_token *token, t_shell *shell);
+void	last_step(t_shell *shell, t_token *token, pid_t pid);
+
 // -- Builins -- // 
 void	echo(t_token *token, int j);
 void	pwd(void);
