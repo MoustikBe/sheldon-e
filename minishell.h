@@ -118,11 +118,14 @@ int		check_bin_quotes(char *command);
 // src/heredoc/herdoc_exec.c //
 void	exec_herdoc(t_shell *shell);
 void	replace_heredoc(t_shell *shell);
-int		check_env_var(char *str);
 // src/heredoc/herdoc_expansion.c //
 void	heredoc_expansion(t_shell *shell, char *gnl_val, int temp_fd);
-// src/herdoc/hereedoc_main.c //
+// src/herdoc/heredoc_main.c //
 void	here_doc(t_shell *shell);
+// src/herdoc/heredoc_utils.c //
+void	cal_len_heredoc(t_shell *shell, t_utils *utils);
+void	copy_heredoc(t_shell *shell, t_utils *utils, char *new_cmd, char *tmp_file);
+int		check_env_var(char *str);
 
 // -- Signals -- //
 void	sigint_handler(int sig);
