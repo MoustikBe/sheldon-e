@@ -124,7 +124,8 @@ void	heredoc_expansion(t_shell *shell, char *gnl_val, int temp_fd);
 void	here_doc(t_shell *shell);
 // src/herdoc/heredoc_utils.c //
 void	cal_len_heredoc(t_shell *shell, t_utils *utils);
-void	copy_heredoc(t_shell *shell, t_utils *utils, char *new_cmd, char *tmp_file);
+void	copy_heredoc(t_shell *shell, t_utils *utils,
+			char *new_cmd, char *tmp_file);
 int		check_env_var(char *str);
 
 // -- Signals -- //
@@ -156,7 +157,8 @@ void	check_len_expans(t_shell *shell, t_utils *utils);
 int		copy_env_cmd(int j_copy, int i, t_shell *shell);
 void	copy_for_expansion(t_shell *shell, t_utils *utils, char *cmp_cmd);
 void	copy_in_expansion(t_shell *shell, t_utils *utils);
-void	copy_in_envcmd(t_env *env_v, t_utils *utils, t_shell *shell, int j_copy);
+void	copy_in_envcmd(t_env *env_v, t_utils *utils,
+			t_shell *shell, int j_copy);
 void	building_cmp_cmd(t_utils *utils, t_shell *shell, int *i);
 // src/env/env_expansion_utils.c //
 void	loop_utils(t_env *env_v, t_utils *utils);
@@ -218,7 +220,8 @@ void	child_process_fd(char *file_in);
 void	child_process(int fd[2], t_token *tok, char *file_in, t_shell *shell);
 void	child_process_menu(t_shell *shell, t_token *token, char **cmd_exec);
 void	parent_process(int fd[2], t_token *token, t_shell *shell);
-void	parent_menu(t_utils *u, t_token *token, t_shell *shell, char **cmd_exec);
+void	parent_menu(t_utils *u, t_token *token,
+			t_shell *shell, char **cmd_exec);
 void	parent_inter_step(int fd[2]);
 // src/executer/exec_multi_pipe.c //
 void	pipex_multi(t_token *token, t_shell *shell);
@@ -234,7 +237,8 @@ void	sub_process(t_shell *shell, t_token *token, pid_t pid);
 void	createprocessus(pid_t pid, t_shell *shell, t_token *token);
 void	wait_execution(int nb_cmd);
 void	command_execution(t_token *token, t_shell *shell);
-void	command_execution_next(t_shell *shell, t_token *token, char **cmd_exec, int i_copy);
+void	command_execution_next(t_shell *shell, t_token *token,
+			char **cmd_exec, int i_copy);
 // src/executer/exec_multi_step.c //
 void	to_nb_cmd(t_shell *shell);
 void	from_nb_cmd(t_shell *shell);
@@ -268,7 +272,6 @@ char	*word_dup_special(char *str, int start, int finish);
 int		init_struct_split(t_split *split, char *s);
 int		word_dup_len(t_split *sp, int finish, char *str);
 int		copy_words(t_split *sp, char **split, char *s);
-
 // src/micro_lib/ft_split_quote.c //
 void	cw_scenario_1(t_split *sp, char *s, char c, int *x);
 void	change_for_0(t_split *sp, char *s, int *x);
