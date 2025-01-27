@@ -1,16 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*   herdoc_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:20:40 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/16 14:30:47 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:16:59 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	heredoc_sig(int sig)
+{
+	(void)sig;
+	write(STDOUT_FILENO, "\n", 1);
+	exit(130);
+}
+
+void	child_gnl_exec(t_shell *shell, t_utils *utils,
+char *gnl_val, char *delemiter)
+{
+	while (1)
+	{
+		signal(SIGINT, &heredoc_sig);
+		gnl_val = get_next_line(0);
+		if (gnl_val == NULL)
+		{
+			printf("exit\n");
+			break ;
+		}
+		if (str_cmp(gnl_val, delemiter) == 1)
+			break ;
+		if (check_env_var(gnl_val) == 1)
+		{
+			heredoc_expansion(shell, gnl_val, utils->temp_fd);
+			write(0, "> ", 2);
+		}
+		else
+		{
+			write(utils->temp_fd, gnl_val, ft_strlen(gnl_val));
+			write(0, "> ", 2);
+		}
+		free(gnl_val);
+	}
+}
 
 void	cal_len_heredoc(t_shell *shell, t_utils *utils)
 {

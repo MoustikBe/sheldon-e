@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:00:42 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/10 20:00:43 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:26:40 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parsing_main(char *cmd)
 	int		ret_val;
 
 	if (pars_except(cmd) == 0)
-		return (0);
+		return (-1);
 	pars_cmd = ft_split(cmd, ' ');
 	if (pars_cmd[0] == NULL)
 		return (free_array(pars_cmd), -1);

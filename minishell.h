@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:52:33 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/23 20:57:41 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:18:52 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct t_token
 	int		id;
 }	t_token;
 // -- End -- //
+static int	g_signal;
 
 // -- Declaration of external function -- //
 // -- Parsing -- //
@@ -127,6 +128,9 @@ void	cal_len_heredoc(t_shell *shell, t_utils *utils);
 void	copy_heredoc(t_shell *shell, t_utils *utils,
 			char *new_cmd, char *tmp_file);
 int		check_env_var(char *str);
+void	heredoc_sig(int sig);
+void	child_gnl_exec(t_shell *shell, t_utils *utils,
+			char *gnl_val, char *delemiter);
 
 // -- Signals -- //
 void	sigint_handler(int sig);

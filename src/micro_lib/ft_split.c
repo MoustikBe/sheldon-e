@@ -6,11 +6,24 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:38:00 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/20 12:35:56 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:13:46 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static void	count_words_utils(t_split *sp, char *s)
+{
+	if (s[sp->count] == '"' && sp->in_quotes == 0)
+		sp->in_quotes = 1;
+	else if (s[sp->count] == '"' && sp->in_quotes == 1)
+		sp->in_quotes = 0;
+	else if (s[sp->count] == '\'' && sp->in_quote == 0)
+		sp->in_quote = 1;
+	else if (s[sp->count] == '\'' && sp->in_quote == 1)
+		sp->in_quote = 0;
+	sp->count++;
+}
 
 static int	count_words(t_split *sp, char *s, char c)
 {
@@ -19,17 +32,17 @@ static int	count_words(t_split *sp, char *s, char c)
 		if (s[sp->count] == '"' && sp->in_quotes == 0)
 			sp->in_quotes = 1;
 		else if (s[sp->count] == '"' && sp->in_quotes == 1)
-			cw_scenario_1(sp, s, '"', &(sp->in_quotes));
+			sp->in_quotes = 0;
 		else if (s[sp->count] == '\'' && sp->in_quote == 0)
 			sp->in_quote = 1;
 		else if (s[sp->count] == '\'' && sp->in_quote == 1)
-			cw_scenario_1(sp, s, '\'', &(sp->in_quote));
+			sp->in_quote = 0;
 		else if (s[sp->count] != c && sp->in_quotes == 0 && sp->in_quote == 0)
 		{
 			sp->word++;
-			while (s[sp->count] && s[sp->count] != c
-				&& s[sp->count] != '"' && s[sp->count] != '\'')
-				sp->count++;
+			while (s[sp->count] && (s[sp->count] != c
+					|| sp->in_quotes || sp->in_quote))
+				count_words_utils(sp, s);
 			sp->count--;
 		}
 		sp->count++;
@@ -49,21 +62,21 @@ char	*word_dup_special(char *str, int start, int finish)
 	sp->inside = 0;
 	while (start < finish)
 	{
-		if ((start == finish - 1 && str[start] == '"')
-			|| (start == finish - 1 && str[start] == '\''))
-			start++;
-		else if ((str[start] == '"' && sp->inside == 0)
-			|| (str[start] == '\'' && sp->inside == 0))
+		if ((str[start] == '"' || str[start] == '\'') && sp->inside == 0)
 		{
 			sp->inside = 1;
+			start++;
+		}
+		else if ((str[start] == '"' || str[start] == '\'') && sp->inside == 1)
+		{
+			sp->inside = 0;
 			start++;
 		}
 		else
 			word[sp->i_wd++] = str[start++];
 	}
 	word[sp->i_wd] = '\0';
-	free(sp);
-	return (word);
+	return (free(sp), word);
 }
 
 static int	condition_loop(t_split *sp, char **split, char *s, char c)

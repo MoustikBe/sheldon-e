@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:20:40 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/16 14:30:47 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:19:28 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,18 @@ static void	copy_delimiter(t_shell *shell, t_utils *utils, char *delemiter)
 static void	gnl_exec_herdoc(t_shell *shell, t_utils *utils,
 char *gnl_val, char *delemiter)
 {
-	while (1)
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
 	{
-		gnl_val = get_next_line(0);
-		if (gnl_val == NULL)
-		{
-			printf("exit\n");
-			break ;
-		}
-		if (str_cmp(gnl_val, delemiter) == 1)
-			break ;
-		if (check_env_var(gnl_val) == 1)
-		{
-			heredoc_expansion(shell, gnl_val, utils->temp_fd);
-			write(0, "> ", 2);
-		}
-		else
-		{
-			write(utils->temp_fd, gnl_val, ft_strlen(gnl_val));
-			write(0, "> ", 2);
-		}
+		child_gnl_exec(shell, utils, gnl_val, delemiter);
+		free(delemiter);
 		free(gnl_val);
+		exit(0);
 	}
-	free(delemiter);
-	free(gnl_val);
-	return ;
+	else
+		wait(0);
 }
 
 void	exec_herdoc(t_shell *shell)

@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:02:26 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/21 13:31:29 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:21:52 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ t_token	*token_main(char *cmd, t_token *token, t_shell *shell)
 		u->len = len_for_token(cmd, u->j);
 		token[u->i].str = malloc(sizeof(char) * u->len + 1);
 		u->flag = token_copy(token, cmd, u->i, u->j);
+		printf("str -> %s\n", token[u->i].str);
 		if (token[u->i].str[0] == 0)
 		{
 			free(token[u->i].str);
 			token[u->i].str = ft_strdup("\"");
 		}
 		token_id(token, u->i, shell);
+		printf("str -> %d\n", token[u->i].id);
 		token_main_next(token, u, cmd);
 	}
 	token[u->i].str = NULL;

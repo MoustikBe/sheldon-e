@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/21 13:07:18 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:25:27 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ static void	main_loop(t_shell *shell, t_token *token, char **envp)
 {
 	int		ret_val;
 
-	if (shell->cmd[0] == '\0' || verif_quotes(shell->cmd))
+	if (shell->cmd[0] == '\0')
 		ret_val = -1;
+	else if (verif_quotes(shell->cmd))
+		ret_val = 0;
 	else
 	{
 		cmd_cleaner(shell);
@@ -94,3 +96,10 @@ int	main(int argc, char **argv, char **envp)
 	unlink("/tmp/.heredoc");
 	return (free(shell->cmd), free_env(shell), free(shell), 0);
 }
+
+// l"""""s"""""
+// p""""''""''""w''''''""''d
+// Here_doc SIGNALS && EXPANSION 
+// Gerer les message d'erreur 
+// lastexit Status 
+// <
