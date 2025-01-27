@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:52:33 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:18:52 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:56:43 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ typedef struct t_token
 	int		id;
 }	t_token;
 // -- End -- //
-static int	g_signal;
 
 // -- Declaration of external function -- //
 // -- Parsing -- //
@@ -134,7 +133,7 @@ void	child_gnl_exec(t_shell *shell, t_utils *utils,
 
 // -- Signals -- //
 void	sigint_handler(int sig);
-void	manage_signals(void);
+void	manage_signals(t_shell *shell);
 
 // -- Organizer -- //
 // src/organizer/cmd_cleaner.c //

@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:25:27 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:54:09 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	main_loop(t_shell *shell, t_token *token, char **envp)
 		ret_val = parsing_main(shell->cmd);
 	}
 	if (ret_val == -1)
-		shell->last_exit_status = 127;
+		shell->last_exit_status = 0;
 	else if (ret_val == 0)
 	{
 		printf("\033[0;31mMinishell : command invalid \033[00m\n");
@@ -82,7 +82,7 @@ int	main(int argc, char **argv, char **envp)
 	shell->last_exit_status = 0;
 	while (1)
 	{
-		manage_signals();
+		manage_signals(shell);
 		shell->error = 0;
 		shell->cmd = readline("\033[34;01mMinishell : \033[00m");
 		add_history(shell->cmd);
