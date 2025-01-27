@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:04:34 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/16 09:24:10 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:28:33 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	write_func(t_token *token, int j, char *fd_mngt, int file)
 	if (file == -1)
 	{
 		perror("open");
-		exit(EXIT_FAILURE);
+		free(fd_mngt);
+		return ;
 	}
 	dup2(file, STDOUT_FILENO);
 	close(file);
@@ -33,7 +34,8 @@ static void	append_func(t_token *token, int j, char *fd_mngt, int file)
 	if (file == -1)
 	{
 		perror("open");
-		exit(EXIT_FAILURE);
+		free(fd_mngt);
+		return ;
 	}
 	dup2(file, STDOUT_FILENO);
 	close(file);

@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:07:57 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/14 09:41:31 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:42:45 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	unset(t_shell *shell, t_token *token, int j)
 			shell->env = env_v->next;
 			free(env_v->env_var);
 			free(env_v);
+			free(cmp_cmd);
 			j++;
 			continue ;
 		}
