@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:54:09 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:17:22 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,3 @@ int	main(int argc, char **argv, char **envp)
 	unlink("/tmp/.heredoc");
 	return (free(shell->cmd), free_env(shell), free(shell), 0);
 }
-
-// l"""""s"""""
-// p""""''""''""w''''''""''d
-// Here_doc SIGNALS && EXPANSION 
-// Gerer les message d'erreur 
-// lastexit Status 
-// <
