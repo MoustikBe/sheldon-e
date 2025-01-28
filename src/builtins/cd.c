@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:54:47 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 11:30:15 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:09:14 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	cd(t_shell *shell, char *path)
 		path = ft_strdup(shell->home);
 		if (path == NULL)
 			printf("cd: HOME not set\n");
-		else 
+		else
 		{
 			return_val = chdir(path);
 			if (return_val < 0)
@@ -29,7 +29,7 @@ void	cd(t_shell *shell, char *path)
 			free(path);
 		}
 		return ;
-	}	
+	}
 	return_val = chdir(path);
 	if (return_val < 0)
 		perror("open");

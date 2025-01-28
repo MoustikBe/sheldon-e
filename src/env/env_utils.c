@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:31:04 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 11:46:44 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:08:55 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	search_in_env_writed(t_shell *shell, char *cmp_cmd, int temp_fd)
 
 void	home_set(t_shell *shell)
 {
-	int	i;
+	int		i;
 	t_env	*env_v;
 
 	i = 0;

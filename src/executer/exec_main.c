@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:34:08 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 11:04:39 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:08:40 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	exec_main_next(t_shell *shell, t_token *token, char **envp)
 	else if (token[0].id == 11)
 		echo(token, 0);
 	else if (token[0].id == 12)
-		cd(shell ,token[1].str);
+		cd(shell, token[1].str);
 	else if (token[0].id == 13)
 		pwd();
 	else if (token[0].id == 14)
