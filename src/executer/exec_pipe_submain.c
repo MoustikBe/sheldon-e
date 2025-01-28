@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:38:12 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/23 20:43:27 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:05:50 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	child_process_menu(t_shell *shell, t_token *token, char **cmd_exec)
 	if (check_cmd_quotes(cmd_exec[0]) == 2)
 		echo(token, 0);
 	else if (check_cmd_quotes(cmd_exec[0]) == 3)
-		cd(token[1].str);
+		cd(shell, token[1].str);
 	else if (check_cmd_quotes(cmd_exec[0]) == 4)
 		pwd();
 	else if (check_cmd_quotes(cmd_exec[0]) == 5)
@@ -90,7 +90,7 @@ t_shell *shell, char **cmd_exec)
 	if (check_cmd_quotes(cmd_exec[0]) == 2)
 		echo(token, u->i_copy);
 	else if (check_cmd_quotes(cmd_exec[0]) == 3)
-		cd(token[1].str);
+		cd(shell, token[1].str);
 	else if (check_cmd_quotes(cmd_exec[0]) == 4)
 		pwd();
 	else if (check_cmd_quotes(cmd_exec[0]) == 5)

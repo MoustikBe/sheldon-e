@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:00:42 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:26:40 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:02:56 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	handle_ret_val(int ret_val, char **pars_cmd)
 	if (ret_val == 3)
 	{
 		if (pars_cd(pars_cmd) == 0)
-			return (free_array(pars_cmd), 0);
+			return (free_array(pars_cmd), -1);
 		return (free_array(pars_cmd), 1);
 	}
 	if (ret_val == 5)

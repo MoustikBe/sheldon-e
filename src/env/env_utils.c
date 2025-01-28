@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:31:04 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/16 09:09:59 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:46:44 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,21 @@ int	search_in_env_writed(t_shell *shell, char *cmp_cmd, int temp_fd)
 		env_v = env_v->next;
 	}
 	return (0);
+}
+
+void	home_set(t_shell *shell)
+{
+	int	i;
+	t_env	*env_v;
+
+	i = 0;
+	shell->home = NULL;
+	env_v = shell->env;
+	while (env_v)
+	{
+		if (ft_strncmp(env_v->env_var, "HOME=", 5) == 0)
+			shell->home = ft_strdup(env_v->env_var + 5);
+		env_v = env_v->next;
+	}
+	return ;
 }

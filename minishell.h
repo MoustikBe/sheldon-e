@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:52:33 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:56:43 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:43:30 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct t_shell
 	int		flag;
 	int		status;
 	int		last_exit_status;
+	char	*home;
 	t_env	*env;
 }	t_shell;
 
@@ -171,6 +172,7 @@ void	else_possibility(char *cmp_cmd_1, char *cmp_cmd_2);
 void	utils_inter_step(t_utils *utils, t_shell *shell);
 // src/env/env_utils.c //
 int		search_in_env_writed(t_shell *shell, char *cmp_cmd, int temp_fd);
+void	home_set(t_shell *shell);
 
 // -- Token -- //
 // src/token/token_main.c //
@@ -252,7 +254,7 @@ void	last_step(t_shell *shell, t_token *token, pid_t pid);
 // -- Builins -- // 
 void	echo(t_token *token, int j);
 void	pwd(void);
-void	cd(char *path);
+void	cd(t_shell *shell, char *path);
 void	export(t_shell *shell, t_token *token, int j);
 void	env(t_shell *shell);
 void	unset(t_shell *shell, t_token *token, int j);
@@ -293,6 +295,7 @@ void	init_var_utils(t_utils *utils);
 char	*clean_name(char *src);
 char	*ft_strdup(char *src);
 void	ft_putchar_fd(char c, int fd);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // -- End of declaration -- //
 #endif

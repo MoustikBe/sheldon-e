@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:00:23 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/16 09:13:39 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:02:38 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 static int	verify_access(char *pars_cmd)
 {
 	if (opendir(pars_cmd) == NULL)
+	{
+		perror("open");
 		return (0);
+	}
 	return (1);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_next.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:33:52 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/20 12:46:20 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:22:16 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,20 @@ char	*ft_strdup(char *src)
 void	ft_putchar_fd(char c, int fd)
 {
 	write (fd, &c, 1);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	count;
+
+	count = 0;
+	if (!n)
+		return (0);
+	while (count < n && s1[count] && s2[count]
+		&& (unsigned char)s1[count] == (unsigned char)s2[count])
+		count++;
+	if (count < n)
+		return ((unsigned char)s1[count] - (unsigned char)s2[count]);
+	else
+		return (0);
 }

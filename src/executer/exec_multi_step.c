@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:52:11 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/23 21:06:26 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:05:37 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	step_1_next(t_token *token, t_shell *shell, char **cmd_exec)
 	if (check_cmd_quotes(cmd_exec[0]) == 2)
 		echo(token, 0);
 	else if (check_cmd_quotes(cmd_exec[0]) == 3)
-		cd(token[1].str);
+		cd(shell, token[1].str);
 	else if (check_cmd_quotes(cmd_exec[0]) == 4)
 		pwd();
 	else if (check_cmd_quotes(cmd_exec[0]) == 5)
