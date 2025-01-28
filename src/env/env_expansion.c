@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:14:41 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 11:44:03 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:17:59 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void	expansion(t_shell *shell)
 	init_var_utils(utils);
 	while (shell->cmd[utils->i])
 	{
-		if (shell->cmd[utils->i] == '$' && utils->quot_flag == 0)
+		if (shell->cmd[utils->i] == '$' && utils->quot_flag == 0
+			&& shell->cmd[utils->i + 1] != ' ' && shell->cmd[utils->i + 1] != '\0')
 			dolar_expansion(shell, utils);
 		else
 			check_len_expans(shell, utils);

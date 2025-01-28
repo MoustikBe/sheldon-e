@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:38:00 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:13:46 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:44:42 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ static int	count_words(t_split *sp, char *s, char c)
 			sp->in_quote = 1;
 		else if (s[sp->count] == '\'' && sp->in_quote == 1)
 			sp->in_quote = 0;
-		else if (s[sp->count] != c && sp->in_quotes == 0 && sp->in_quote == 0)
+		if (s[sp->count] != c)
 		{
 			sp->word++;
+			sp->count++;
 			while (s[sp->count] && (s[sp->count] != c
-					|| sp->in_quotes || sp->in_quote))
+					|| sp->in_quotes || sp->in_quote ))
 				count_words_utils(sp, s);
 			sp->count--;
 		}
@@ -116,7 +117,7 @@ char	**ft_split(char *s, char c)
 	sp = malloc(sizeof(t_split));
 	if (init_struct_split(sp, s))
 		return (NULL);
-	split = malloc((count_words(sp, s, c) + 2) * sizeof(char *));
+	split = malloc((count_words(sp, s, c) + 1) * sizeof(char *));
 	while (++(sp->i) <= ft_strlen(s))
 	{
 		if (condition_loop(sp, split, s, c))
