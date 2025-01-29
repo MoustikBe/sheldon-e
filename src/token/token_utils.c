@@ -50,16 +50,16 @@ int	len_token(char *cmd)
 	return (save_val);
 }
 
-static void	token_copy_flag(t_utils *u, int *j, int *x)
+void	token_copy_flag(t_utils *u, int *x)
 {
-	(*j)++;
+	u->j++;
 	*x = 1;
 	u->flag = 1;
 }
 
-static void	toke_reset_quot(int *j, int *x)
+void	toke_reset_quot(t_utils *u, int *x)
 {
-	(*j)++;
+	u->j++;
 	*x = 0;
 }
 
@@ -70,24 +70,10 @@ int	token_copy(t_token *token, char *cmd, int i, int j)
 
 	u = malloc(sizeof(t_utils));
 	init_var_utils(u);
-	while (cmd[j] == ' ')
-		j++;
-	while (cmd[j])
-	{
-		if (cmd[j] == ' ' && u->in_quotes == 0 && u->in_quote == 0)
-			break ;
-		else if (cmd[j] == '"' && u->in_quotes == 0)
-			token_copy_flag(u, &j, &u->in_quotes);
-		else if (cmd[j] == '"' && u->in_quotes == 1)
-			toke_reset_quot(&j, &u->in_quotes);
-		else if (cmd[j] == '\'' && u->in_quote == 0)
-			token_copy_flag(u, &j, &u->in_quote);
-		else if (cmd[j] == '\'' && u->in_quote == 1)
-			toke_reset_quot(&j, &u->in_quote);
-		else
-			token[i].str[u->len++] = cmd[j++];
-	}
+	u->j = j;
+	while (cmd[u->j] == ' ')
+		u->j++;
+	save_val = token_copy_loop(u, token, cmd, i);
 	token[i].str[u->len] = '\0';
-	save_val = u->flag;
 	return (free(u), save_val);
 }

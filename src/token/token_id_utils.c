@@ -43,28 +43,10 @@ int	is_char(t_token *token, int i)
 
 int	is_pipe(t_token *token, int i)
 {
-	int	j;
-
-	j = 0;
-	while (token[i].str[j])
+	if (str_cmp_quotes(token[i].str, "|") == 1)
 	{
-		if (token[i].str[j] == '|')
-		{
-			if (j > 0)
-			{
-				if (token[i].str[j - 1] != '\'' && token[i].str[j - 1] != '"')
-				{
-					token[i].id = 6;
-					return (1);
-				}
-			}
-			else
-			{
-				token[i].id = 6;
-				return (1);
-			}
-		}
-		j++;
+		token[i].id = 6;
+		return (1);
 	}
 	return (0);
 }
@@ -83,4 +65,29 @@ int	is_infile(t_token *token, int i, t_shell *shell)
 		return (1);
 	}
 	return (0);
+}
+
+int	token_copy_loop(t_utils *u, t_token *token, char *cmd, int i)
+{
+	while (cmd[u->j])
+	{
+		if (cmd[u->j] == ' ' && u->in_quotes == 0 && u->in_quote == 0)
+			break ;
+		else if (cmd[u->j] == '"' && u->in_quotes == 0)
+			token_copy_flag(u, &u->in_quotes);
+		else if (cmd[u->j] == '"' && u->in_quotes == 1)
+			toke_reset_quot(u, &u->in_quotes);
+		else if (cmd[u->j] == '\'' && u->in_quote == 0)
+			token_copy_flag(u, &u->in_quote);
+		else if (cmd[u->j] == '\'' && u->in_quote == 1)
+			toke_reset_quot(u, &u->in_quote);
+		else if (u->j > 1 && cmd[u->j] == '|' && cmd[u->j - 1] == '\'')
+		{
+			token[i].str[u->len++] = cmd[u->j++];
+			token[i].id = 60;
+		}
+		else
+			token[i].str[u->len++] = cmd[u->j++];
+	}
+	return (u->flag);
 }

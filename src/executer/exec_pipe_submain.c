@@ -28,7 +28,7 @@ void	child_process(int fd[2], t_token *tok, char *file_in, t_shell *shell)
 	cmd_exec = child_join_char(u, tok);
 	if (check_cmd_quotes(cmd_exec[0]) > 1)
 		child_process_menu(shell, tok, cmd_exec);
-	else if(check_cmd_quotes(cmd_exec[0]) == 0)
+	else if (check_cmd_quotes(cmd_exec[0]) == 0)
 	{
 		printf("%s: command not found\n", cmd_exec[0]);
 		exit(0);
@@ -74,7 +74,7 @@ void	parent_process(int fd[2], t_token *token, t_shell *shell)
 	parent_file_mngt(u, token);
 	if (!cmd_exec[0])
 		exit(0);
-	if(check_cmd_quotes(cmd_exec[0]) == 0)
+	if (check_cmd_quotes(cmd_exec[0]) == 0)
 	{
 		printf("%s: command not found\n", cmd_exec[0]);
 		exit(0);

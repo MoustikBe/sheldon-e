@@ -189,9 +189,12 @@ int		is_var(t_token *token, int i);
 int		is_char(t_token *token, int i);
 int		is_pipe(t_token *token, int i);
 int		is_infile(t_token *token, int i, t_shell *shell);
+int		token_copy_loop(t_utils *u, t_token *token, char *cmd, int i);
 // src/token/token_utils.c //
 int		len_token(char *cmd);
 int		token_copy(t_token *token, char *cmd, int i, int j);
+void	token_copy_flag(t_utils *u, int *x);
+void	toke_reset_quot(t_utils *u, int *x);
 // src/token/token_utils_next.c //
 void	free_all_token(t_token *token);
 int		len_for_token(char *cmd, int i);
