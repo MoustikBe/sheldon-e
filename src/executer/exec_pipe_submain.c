@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:38:12 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/29 12:37:35 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:29:41 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	child_process(int fd[2], t_token *tok, char *file_in, t_shell *shell)
 	cmd_exec = child_join_char(u, tok);
 	if (check_cmd_quotes(cmd_exec[0]) > 1)
 		child_process_menu(shell, tok, cmd_exec);
+	else if(check_cmd_quotes(cmd_exec[0]) == 0)
+	{
+		printf("%s: command not found\n", cmd_exec[0]);
+		exit(0);
+	}
 	path = make_path(cmd_exec[0], shell);
 	execve(path, cmd_exec, NULL);
 }
@@ -67,6 +72,13 @@ void	parent_process(int fd[2], t_token *token, t_shell *shell)
 	parent_inter_step(fd);
 	u->i = u->i_copy;
 	parent_file_mngt(u, token);
+	if (!cmd_exec[0])
+		exit(0);
+	if(check_cmd_quotes(cmd_exec[0]) == 0)
+	{
+		printf("%s: command not found\n", cmd_exec[0]);
+		exit(0);
+	}
 	if (check_cmd_quotes(cmd_exec[0]) > 1)
 		parent_menu(u, token, shell, cmd_exec);
 	path = make_path(cmd_exec[0], shell);
@@ -90,7 +102,6 @@ t_shell *shell, char **cmd_exec)
 		env(shell);
 	else if (check_cmd_quotes(cmd_exec[0]) == 8)
 		ft_exit(token, u->i_copy);
-	free(u->cmp_cmd_1);
 	exit(0);
 }
 

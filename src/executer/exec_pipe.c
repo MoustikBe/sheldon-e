@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:06:06 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/29 12:37:19 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:07:01 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ void	inter_step_pipe(int fd[2])
 	close(fd[0]);
 	close(fd[1]);
 }
-/*
-static void	parent_join_char(t_utils *utils, t_token *token)
-{
-	
-}
-*/
 
 char	**parent_buildcharloop(t_utils *u, t_token *token)
 {
