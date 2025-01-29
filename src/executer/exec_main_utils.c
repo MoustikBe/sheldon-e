@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:26:59 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/23 20:28:13 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:53:59 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@ void	verif_in(t_token *token, int i)
 		exit(1);
 	}
 	free(try_in);
+}
+
+int	token_nb(t_token *token, int i)
+{
+	int	len;
+
+	len = 0;
+	while (token[i].str && token[i].id != 6)
+	{
+		len++;
+		i++;
+	}
+	return (i);
 }

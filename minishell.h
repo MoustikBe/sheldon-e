@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:52:33 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 11:43:30 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:36:36 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,15 +206,16 @@ char	*make_path(char *token, t_shell *shell);
 int		check_path(t_shell *shell);
 void	binary_option(t_shell *shell, t_token *token, char **envp);
 void	exec_bin(t_token *token, char **envp, t_shell *shell);
-void	exec_bin_next(t_token *token, t_utils *utils);
+char	**exec_bin_next(t_token *token, t_utils *utils);
 // src/executer/exec_main_utils.c //
 int		check_pipe(t_token *token);
 void	verif_in(t_token *token, int i);
+int		token_nb(t_token *token, int i);
 // src/executer/exec_pipe.c //
 void	pipex_simple(t_token *token, t_shell *shell);
-void	parent_buildcharloop(t_utils *u, t_token *token);
+char	**parent_buildcharloop(t_utils *u, t_token *token);
 void	inter_step_pipe(int fd[2]);
-void	child_join_char(t_utils *utils, t_token *token);
+char	**child_join_char(t_utils *u, t_token *tok);
 // src/executer/exec_pipe_file.c //
 void	parent_file_4(t_utils *utils, t_token *token);
 void	parent_file_40(t_utils *utils, t_token *token);
@@ -230,7 +231,7 @@ void	parent_menu(t_utils *u, t_token *token,
 void	parent_inter_step(int fd[2]);
 // src/executer/exec_multi_pipe.c //
 void	pipex_multi(t_token *token, t_shell *shell);
-void	joining_command(t_utils *utils, t_token *token, t_shell *shell);
+char	**joining_command(t_token *token, t_shell *shell, t_utils *u);
 // src/executer/exec_multi_file.c //
 void	last_step_4(t_token *token, int i);
 void	last_step_40(t_token *token, int i);
@@ -271,7 +272,6 @@ void	free_array(char **arr);
 int		ft_isalnum(int alph);
 // src/micro_lib/ft_split.c //
 char	**ft_split(char *s, char c);
-char	*ft_strjoin(char *s1, char *s2);
 char	*word_dup_special(char *str, int start, int finish);
 // src/micro_lib/ft_split_utils.c //
 int		init_struct_split(t_split *split, char *s);

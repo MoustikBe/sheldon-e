@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:52:11 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 11:05:37 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:24:39 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,25 @@ void	step_1_next(t_token *token, t_shell *shell, char **cmd_exec)
 
 void	step_1(pid_t pid, t_token *token, t_shell *shell)
 {
+	int		i;
 	char	*path;
-	char	*cmd_join;
 	char	**cmd_exec;
 
+	i = 0;
 	if (pid == 0)
 	{
 		dup2(shell->fd[1], STDOUT_FILENO);
 		close(shell->fd[0]);
 		close(shell->fd[1]);
 		shell->index = 0;
-		cmd_join = calloc(1, 1);
+		cmd_exec = malloc((token_nb(token, 0) + 1) * sizeof(char *));
 		while (token[shell->index].id != 6)
 		{
-			cmd_join = ft_strjoin(cmd_join, token[shell->index].str);
-			cmd_join = ft_strjoin(cmd_join, " ");
+			cmd_exec[i] = ft_strdup(token[shell->index].str);
+			i++;
 			shell->index++;
 		}
-		cmd_exec = ft_split(cmd_join, ' ');
+		cmd_exec[i] = NULL;
 		if (check_cmd_quotes(cmd_exec[0]) > 1)
 			step_1_next(token, shell, cmd_exec);
 		path = make_path(cmd_exec[0], shell);

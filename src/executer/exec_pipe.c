@@ -6,17 +6,34 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:06:06 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/23 20:43:56 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:37:19 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	child_join_char(t_utils *utils, t_token *token)
+char	**child_join_char(t_utils *u, t_token *tok)
 {
-	utils->cmp_cmd_1 = ft_strjoin(utils->cmp_cmd_1, token[utils->i].str);
-	utils->cmp_cmd_1 = ft_strjoin(utils->cmp_cmd_1, " ");
-	utils->i++;
+	char	**cmd_exec;
+	int		i;
+
+	i = 0;
+	cmd_exec = malloc((token_nb(tok, u->i) + 1) * sizeof(char *));
+	while (tok[u->i].id != 6)
+	{
+		if (tok[u->i].id == 4 || (tok[u->i].id == 5
+				&& str_cmp(tok[0].str, "cat") == 0
+				&& str_cmp(tok[0].str, "/bin/cat") == 0) || tok[u->i].id == 40)
+			u->i++;
+		else
+		{
+			cmd_exec[i] = ft_strdup(tok[u->i].str);
+			u->i++;
+			i++;
+		}
+	}
+	cmd_exec[i] = NULL;
+	return (cmd_exec);
 }
 
 void	inter_step_pipe(int fd[2])
@@ -25,16 +42,20 @@ void	inter_step_pipe(int fd[2])
 	close(fd[0]);
 	close(fd[1]);
 }
-
+/*
 static void	parent_join_char(t_utils *utils, t_token *token)
 {
-	utils->cmp_cmd_1 = ft_strjoin(utils->cmp_cmd_1, token[utils->i].str);
-	utils->cmp_cmd_1 = ft_strjoin(utils->cmp_cmd_1, " ");
-	utils->i++;
+	
 }
+*/
 
-void	parent_buildcharloop(t_utils *u, t_token *token)
+char	**parent_buildcharloop(t_utils *u, t_token *token)
 {
+	char	**cmd_exec;
+	int		i;
+
+	i = 0;
+	cmd_exec = malloc(token_nb(token, u->i) * sizeof(char *));
 	while (token[u->i].str)
 	{
 		if (token[u->i].id == 4 || (token[u->i].id == 5
@@ -43,8 +64,14 @@ void	parent_buildcharloop(t_utils *u, t_token *token)
 			|| token[u->i].id == 40)
 			u->i++;
 		else
-			parent_join_char(u, token);
+		{
+			cmd_exec[i] = ft_strdup(token[u->i].str);
+			i++;
+			u->i++;
+		}
 	}
+	cmd_exec[i] = NULL;
+	return (cmd_exec);
 }
 
 void	pipex_simple(t_token *token, t_shell *shell)

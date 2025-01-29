@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:17:12 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 10:01:23 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:44:12 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,7 @@ void	exec_bin(t_token *token, char **envp, t_shell *shell)
 	path = make_path(token[0].str, shell);
 	if (!path)
 		return ;
-	utils->cmp_cmd_1 = calloc(1, 1);
-	exec_bin_next(token, utils);
-	exec_cmd = ft_split(utils->cmp_cmd_1, ' ');
-	free(utils->cmp_cmd_1);
+	exec_cmd = exec_bin_next(token, utils);
 	execve(path, exec_cmd, envp);
 	free(path);
 	free_array(exec_cmd);
@@ -110,8 +107,13 @@ void	exec_bin(t_token *token, char **envp, t_shell *shell)
 	exit(2);
 }
 
-void	exec_bin_next(t_token *token, t_utils *utils)
+char	**exec_bin_next(t_token *token, t_utils *utils)
 {
+	char	**exec_cmd;
+	int		i;
+
+	i = 0;
+	exec_cmd = malloc((token_nb(token, 0) + 1) * sizeof(char *));
 	while (token[utils->i].str)
 	{
 		if (token[utils->i].id == 4 || (token[utils->i].id == 5
@@ -125,10 +127,11 @@ void	exec_bin_next(t_token *token, t_utils *utils)
 		}
 		else
 		{
-			utils->cmp_cmd_1 = ft_strjoin(utils->cmp_cmd_1,
-					token[utils->i].str);
-			utils->cmp_cmd_1 = ft_strjoin(utils->cmp_cmd_1, " ");
+			exec_cmd[i] = ft_strdup(token[utils->i].str);
+			i++;
 			utils->i++;
 		}
 	}
+	exec_cmd[i] = NULL;
+	return (exec_cmd);
 }

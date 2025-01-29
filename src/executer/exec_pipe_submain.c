@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:38:12 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 11:05:50 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:37:35 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,18 @@
 
 void	child_process(int fd[2], t_token *tok, char *file_in, t_shell *shell)
 {
+	int		i;
 	char	*path;
 	char	**cmd_exec;
 	t_utils	*u;
 
+	i = 0;
 	u = malloc(sizeof(t_utils));
 	init_var_utils(u);
 	if (file_in)
 		child_process_fd(file_in);
 	inter_step_pipe(fd);
-	u->cmp_cmd_1 = calloc(1, 1);
-	while (tok[u->i].id != 6)
-	{
-		if (tok[u->i].id == 4 || (tok[u->i].id == 5
-				&& str_cmp(tok[0].str, "cat") == 0
-				&& str_cmp(tok[0].str, "/bin/cat") == 0) || tok[u->i].id == 40)
-			u->i++;
-		else
-			child_join_char(u, tok);
-	}
-	cmd_exec = ft_split(u->cmp_cmd_1, ' ');
-	free(u->cmp_cmd_1);
+	cmd_exec = child_join_char(u, tok);
 	if (check_cmd_quotes(cmd_exec[0]) > 1)
 		child_process_menu(shell, tok, cmd_exec);
 	path = make_path(cmd_exec[0], shell);
@@ -68,16 +59,14 @@ void	parent_process(int fd[2], t_token *token, t_shell *shell)
 
 	u = malloc(sizeof(t_utils));
 	init_var_utils(u);
-	u->cmp_cmd_1 = calloc(1, 1);
 	while (token[u->i].id != 6)
 		u->i++;
 	u->i++;
 	u->i_copy = u->i;
-	parent_buildcharloop(u, token);
+	cmd_exec = parent_buildcharloop(u, token);
 	parent_inter_step(fd);
 	u->i = u->i_copy;
 	parent_file_mngt(u, token);
-	cmd_exec = ft_split(u->cmp_cmd_1, ' ');
 	if (check_cmd_quotes(cmd_exec[0]) > 1)
 		parent_menu(u, token, shell, cmd_exec);
 	path = make_path(cmd_exec[0], shell);
