@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 13:37:53 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:46:41 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc > 1)
 		return (printf("ERROR, verify the entry -> %s\n", argv[0]));
 	shell = malloc(sizeof(t_shell));
+	shell->home = malloc(sizeof(char));
 	copy_env(envp, shell);
 	shell->len_token = 0;
 	shell->last_exit_status = 0;
@@ -94,6 +95,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		main_loop(shell, token, envp);
 	}
+	if (shell->home != NULL)
+		free(shell->home);
 	unlink("/tmp/.heredoc");
 	return (free(shell->cmd), free_env(shell), free(shell), 0);
 }

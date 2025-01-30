@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:31:04 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 13:37:15 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:47:00 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ void	home_set(t_shell *shell)
 	t_env	*env_v;
 
 	i = 0;
-	if(shell->home)
-		free(shell->home);
+	free(shell->home);
 	shell->home = NULL;
 	env_v = shell->env;
 	while (env_v)
