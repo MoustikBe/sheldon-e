@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:38:12 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/29 13:29:41 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:52:09 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	child_process(int fd[2], t_token *tok, char *file_in, t_shell *shell)
 	i = 0;
 	u = malloc(sizeof(t_utils));
 	init_var_utils(u);
-	if (file_in)
-		child_process_fd(file_in);
-	inter_step_pipe(fd);
 	cmd_exec = child_join_char(u, tok);
-	if (check_cmd_quotes(cmd_exec[0]) > 1)
-		child_process_menu(shell, tok, cmd_exec);
-	else if (check_cmd_quotes(cmd_exec[0]) == 0)
+	if (check_cmd_quotes(cmd_exec[0]) == 0)
 	{
 		printf("%s: command not found\n", cmd_exec[0]);
 		exit(0);
 	}
+	if (file_in)
+		child_process_fd(file_in);
+	inter_step_pipe(fd);
+	if (check_cmd_quotes(cmd_exec[0]) > 1)
+		child_process_menu(shell, tok, cmd_exec);
 	path = make_path(cmd_exec[0], shell);
 	execve(path, cmd_exec, NULL);
 }

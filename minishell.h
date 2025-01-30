@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:52:33 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/29 13:07:09 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:54:08 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ char	**exec_bin_next(t_token *token, t_utils *utils);
 int		check_pipe(t_token *token);
 void	verif_in(t_token *token, int i);
 int		token_nb(t_token *token, int i);
+void	verif_before_exec(t_token *token, t_shell *shell, char	**cmd_exec);
 // src/executer/exec_pipe.c //
 void	pipex_simple(t_token *token, t_shell *shell);
 char	**parent_buildcharloop(t_utils *u, t_token *token);

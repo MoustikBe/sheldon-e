@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:00:42 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/29 13:22:25 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:16:27 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,27 @@ int	handle_ret_val(int ret_val, char **pars_cmd)
 	return (free_array(pars_cmd), 1);
 }
 
+static int	detecte_pipe(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '|')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	parsing_main(char *cmd)
 {
 	char	**pars_cmd;
 	int		ret_val;
 
+	if (detecte_pipe(cmd) == 1)
+		return (1);
 	if (pars_except(cmd) == 0)
 		return (-1);
 	pars_cmd = ft_split(cmd, ' ');

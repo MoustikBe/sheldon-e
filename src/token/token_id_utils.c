@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:02:23 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/27 15:22:47 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:25:55 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	token_copy_loop(t_utils *u, t_token *token, char *cmd, int i)
 			token_copy_flag(u, &u->in_quote);
 		else if (cmd[u->j] == '\'' && u->in_quote == 1)
 			toke_reset_quot(u, &u->in_quote);
-		else if (u->j > 1 && cmd[u->j] == '|' && cmd[u->j - 1] == '\'')
+		else if (u->j > 1 && cmd[u->j] == '|' && cmd[u->j - 1] == '\''
+			|| u->j > 1 && cmd[u->j] == '|' && cmd[u->j - 1] == '"' )
 		{
 			token[i].str[u->len++] = cmd[u->j++];
 			token[i].id = 60;

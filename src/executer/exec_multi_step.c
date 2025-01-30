@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:52:11 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/29 12:24:39 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:54:30 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void	step_1(pid_t pid, t_token *token, t_shell *shell)
 			shell->index++;
 		}
 		cmd_exec[i] = NULL;
-		if (check_cmd_quotes(cmd_exec[0]) > 1)
-			step_1_next(token, shell, cmd_exec);
+		verif_before_exec(token, shell, cmd_exec);
 		path = make_path(cmd_exec[0], shell);
 		execve(path, cmd_exec, NULL);
 		exit(2);
