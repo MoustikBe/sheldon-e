@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:02:26 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 10:33:21 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:31:19 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token	*token_main(char *cmd, t_token *token, t_shell *shell)
 	}
 	token[u->i].str = NULL;
 	token[u->i].id = 0;
-	token_parser(token, shell, len_token(cmd));
+	//token_parser(token, shell, len_token(cmd));
 	shell->len_token = len_token(cmd);
 	return (free(u), token);
 }

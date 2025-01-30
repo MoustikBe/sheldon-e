@@ -1,6 +1,6 @@
 NAME        = minishell
 CC          = cc
-CFLAGS      = #-Wall -Werror -Wextra 
+CFLAGS      = -Wall -Werror -Wextra 
 LDFLAGS     = -lreadline -g3 #-fsanitize=address
 RM          = rm -rf
 

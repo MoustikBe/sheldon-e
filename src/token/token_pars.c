@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:02:28 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/29 13:11:02 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:31:12 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*make_to_pars(t_shell *shell, int i)
 	free(u);
 	return (to_pars);
 }
-
+/*
 void	token_parser(t_token *token, t_shell *shell, int len)
 {
 	char	*to_pars;
@@ -66,7 +66,6 @@ void	token_parser(t_token *token, t_shell *shell, int len)
 
 	i = 0;
 	return_val = 0;
-	/*
 	while (i < len)
 	{
 		if (token[i].id == 6)
@@ -80,6 +79,6 @@ void	token_parser(t_token *token, t_shell *shell, int len)
 		}
 		i++;
 	}
-	*/
 	return ;
 }
+	*/

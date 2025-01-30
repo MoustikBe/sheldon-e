@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:58:07 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/10 17:58:14 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:38:04 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_exit(t_token *token, int j)
 		i = 0;
 		while (token[j].str[i])
 		{
-			if (!isdigit(token[j].str[i]))
+			if (!isdigit(token[j].str[i]) && token[j].str[i] != '-')
 			{
 				printf("exit\n");
 				printf("numeric argument required\n");
