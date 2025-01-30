@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:20:40 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/27 16:16:59 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:05:23 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char *gnl_val, char *delemiter)
 		}
 		free(gnl_val);
 	}
+	free(gnl_val);
 }
 
 void	cal_len_heredoc(t_shell *shell, t_utils *utils)

@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:26:59 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 13:16:00 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:43:37 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	verif_before_exec(t_token *token, t_shell *shell, char	**cmd_exec)
 	{
 		write(2, cmd_exec[0], strlen(cmd_exec[0]));
 		write(2, ": command not found\n", 20);
-		exit (0);
+		shell->last_exit_status = 127;
+		exit (2);
 	}
 }

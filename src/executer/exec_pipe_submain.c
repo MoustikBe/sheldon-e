@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:38:12 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 12:52:09 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:44:11 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	child_process(int fd[2], t_token *tok, char *file_in, t_shell *shell)
 	if (check_cmd_quotes(cmd_exec[0]) == 0)
 	{
 		printf("%s: command not found\n", cmd_exec[0]);
-		exit(0);
+		shell->last_exit_status = 127;
+		exit(2);
 	}
 	if (file_in)
 		child_process_fd(file_in);
@@ -77,7 +78,8 @@ void	parent_process(int fd[2], t_token *token, t_shell *shell)
 	if (check_cmd_quotes(cmd_exec[0]) == 0)
 	{
 		printf("%s: command not found\n", cmd_exec[0]);
-		exit(0);
+		shell->last_exit_status = 127;
+		exit(2);
 	}
 	if (check_cmd_quotes(cmd_exec[0]) > 1)
 		parent_menu(u, token, shell, cmd_exec);

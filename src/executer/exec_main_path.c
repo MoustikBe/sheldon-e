@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:17:12 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 12:49:12 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:43:16 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	exec_bin(t_token *token, char **envp, t_shell *shell)
 	free(path);
 	free_array(exec_cmd);
 	printf("\033[0;31mMinishell : command invalid \033[00m\n");
+	shell->last_exit_status = 127;
 	exit(2);
 }
 

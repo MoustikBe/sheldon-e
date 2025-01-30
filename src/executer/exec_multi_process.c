@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:52:33 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 13:12:55 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:43:42 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void	command_execution(t_token *token, t_shell *shell)
 	{
 		write(2, cmd_exec[0], strlen(cmd_exec[0]));
 		write(2, ": command not found\n", 20);
-		exit(0);
+		shell->last_exit_status = 127;
+		exit(2);
 	}
 	path = make_path(cmd_exec[0], shell);
 	execve(path, cmd_exec, NULL);
