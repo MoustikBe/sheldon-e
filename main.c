@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 19:53:43 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/29 13:25:23 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:37:53 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	main_loop(t_shell *shell, t_token *token, char **envp)
 	else if (ret_val == 1)
 		main_exec_cmd(token, shell, envp);
 	free(shell->cmd);
-	free(shell->home);
 }
 
 int	main(int argc, char **argv, char **envp)
