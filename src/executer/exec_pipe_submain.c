@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 20:38:12 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 18:44:11 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:09:42 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	parent_process(int fd[2], t_token *token, t_shell *shell)
 	if (check_cmd_quotes(cmd_exec[0]) == 0)
 	{
 		printf("%s: command not found\n", cmd_exec[0]);
-		shell->last_exit_status = 127;
 		exit(2);
 	}
 	if (check_cmd_quotes(cmd_exec[0]) > 1)
