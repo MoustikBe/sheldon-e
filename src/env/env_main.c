@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:29:11 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/28 11:36:53 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:07:28 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	copy_env(char **envp, t_shell *shell)
 	t_env	*env_v;
 	t_env	*new;
 
+	shell->home = malloc(sizeof(char));
 	shell->env = NULL;
 	env_v = shell->env;
 	i = 0;

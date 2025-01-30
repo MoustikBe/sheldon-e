@@ -6,7 +6,7 @@
 /*   By: misaac-c <misaac-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 18:31:04 by misaac-c          #+#    #+#             */
-/*   Updated: 2025/01/30 13:47:00 by misaac-c         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:34:22 by misaac-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,3 @@ void	home_set(t_shell *shell)
 	}
 	return ;
 }
-
-// echo "test"    ddd    "              ass " '$'$d
